@@ -276,7 +276,7 @@ def process_ssdf_data(json_path, output_dir):
 if __name__ == "__main__":
     import sys
     # Accepts optional input JSON path as first argument, defaults to v1.1
-    input_json = sys.argv[1] if len(sys.argv) > 1 else "ssdf_v1.1.json"
+    input_json = sys.argv[1] if len(sys.argv) > 1 else "source_data/ssdf_v1.1.json"
     docs_dir = "docs"
     
     if not os.path.exists(input_json):

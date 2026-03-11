@@ -129,5 +129,5 @@ def convert_xlsx_to_json(xlsx_path, json_path):
         json.dump(final_output, f, indent=2)
         
 if __name__ == "__main__":
-    convert_xlsx_to_json('nist.sp.800-218.ssdf-table.xlsx', 'ssdf_v1.1.json')
+    convert_xlsx_to_json('source_data/nist.sp.800-218.ssdf-table.xlsx', 'source_data/ssdf_v1.1.json')
     print("Conversion completed successfully.")

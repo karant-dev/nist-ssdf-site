@@ -302,4 +302,4 @@ def convert_csv_to_json(csv_path, json_path):
 
 
 if __name__ == "__main__":
-    convert_csv_to_json("SSDF_v1.2.csv", "ssdf_v1.2.json")
+    convert_csv_to_json("source_data/SSDF_v1.2.csv", "source_data/ssdf_v1.2.json")
