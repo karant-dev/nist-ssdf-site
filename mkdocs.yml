@@ -1,6 +1,8 @@
 site_name: NIST SSDF Documentation
 site_description: A text-first, version-controlled static documentation website for the NIST Secure Software Development Framework (SSDF).
-site_author: DocOps Engineer
+site_author: Karan Thakkar
+extra:
+  generator: false
 
 theme:
   name: material
