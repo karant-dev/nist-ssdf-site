@@ -11,16 +11,12 @@
   --md-primary-fg-color: #60a5fa;
   --md-primary-fg-color--light: #93c5fd;
   --md-primary-fg-color--dark: #3b82f6;
-  --md-accent-fg-color: #a5b4fc;
+  --md-accent-fg-color: #bfdbfe;
 }
 
-/* Dynamic Gradient on Main H1 */
+/* H1 — solid primary colour, no gradient */
 .md-typeset h1 {
-  background: linear-gradient(135deg, var(--md-primary-fg-color) 0%, var(--md-accent-fg-color) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
+  color: var(--md-primary-fg-color);
   font-weight: 800;
   letter-spacing: -0.5px;
   margin-bottom: 1rem;
