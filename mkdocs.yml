@@ -63,7 +63,7 @@ extra_css:
 
 nav:
 - NIST SSDF Documentation Hub: index.md
-- V1.2:
+- V1.2 (upcoming):
   - v1.2/index.md
   - 'PO: Prepare the Organization':
     - v1.2/po/index.md
@@ -97,7 +97,7 @@ nav:
     - 'RV.1: Identify and Confirm Vulnerabilities on an Ongoing Basis': v1.2/rv/rv-1.md
     - 'RV.2: Assess, Prioritize, and Remediate Vulnerabilities': v1.2/rv/rv-2.md
     - 'RV.3: Analyze Vulnerabilities to Identify Their Root Causes': v1.2/rv/rv-3.md
-- V1.1:
+- V1.1 (current):
   - v1.1/index.md
   - 'PO: Prepare the Organization':
     - v1.1/po/index.md

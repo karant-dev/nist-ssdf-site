@@ -2,6 +2,13 @@ import json
 import os
 import yaml
 
+# Version status labels shown in nav and hub index page.
+# Update these when the release status of a version changes.
+VERSION_LABELS = {
+    "1.1": "current",
+    "1.2": "upcoming",
+}
+
 def create_markdown_frontmatter(title, practice_identifier, task_identifier, version, references):
     """
     Generate YAML frontmatter to be placed at the top of MkDocs markdown files.
@@ -157,8 +164,10 @@ def process_ssdf_data(json_path, output_dir):
     # Re-build `mkdocs.yml` explicit navigation tree securely
     print("Generating explicit Navigation Tree for mkdocs.yml...")
 
-    # Build this version's nav entry
-    version_entry_key = f"V{version}"
+    # Build this version's nav entry (include status label in the key if defined)
+    version_label = VERSION_LABELS.get(version, "")
+    version_display = f"V{version} ({version_label})" if version_label else f"V{version}"
+    version_entry_key = version_display
     version_nav_items = [f"v{version}/index.md"]
 
     for practice in data.get("practices", []):
@@ -199,6 +208,7 @@ def process_ssdf_data(json_path, output_dir):
             mkdocs_content = mkdocs_content[:mkdocs_content.index("\nnav:\n")]
 
         # Merge: keep hub entry, replace/add this version, keep all other versions
+        # Match on version prefix (V1.1) to handle label changes gracefully
         hub_entry = {"NIST SSDF Documentation Hub": "index.md"}
         merged_nav = [hub_entry]
         version_added = False
@@ -208,7 +218,7 @@ def process_ssdf_data(json_path, output_dir):
             key = list(entry.keys())[0]
             if key == "NIST SSDF Documentation Hub":
                 continue  # Already prepended
-            elif key == version_entry_key:
+            elif key.startswith(f"V{version}"):  # Match ignoring label changes
                 merged_nav.append(new_version_entry)
                 version_added = True
             else:
@@ -223,8 +233,10 @@ def process_ssdf_data(json_path, output_dir):
 
     # Update the root docs/index.md hub page to list this version
     root_index_path = os.path.join(output_dir, "index.md")
-    version_label = f"SSDF Version {version}"
-    version_link = f"[{version_label}](v{version}/index.md)"
+    version_label = VERSION_LABELS.get(version, "")
+    label_suffix = f" ({version_label})" if version_label else ""
+    version_display_text = f"SSDF Version {version}{label_suffix}"
+    version_link = f"[{version_display_text}](v{version}/index.md)"
     version_entry = f"* {version_link}"
 
     if os.path.exists(root_index_path):
