@@ -6,12 +6,17 @@
   --md-accent-fg-color: #10b981;
 }
 
-/* Dark mode: soft periwinkle-blue palette — readable without eye strain */
+/* Dark mode: soft blue palette — readable without eye strain */
 [data-md-color-scheme="slate"] {
   --md-primary-fg-color: #60a5fa;
   --md-primary-fg-color--light: #93c5fd;
   --md-primary-fg-color--dark: #3b82f6;
   --md-accent-fg-color: #bfdbfe;
+}
+
+/* Dark mode header bar — matches h1 text colour */
+[data-md-color-scheme="slate"] .md-header {
+  background-color: #117cff;
 }
 
 /* H1 — solid primary colour, no gradient */
