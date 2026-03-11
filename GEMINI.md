@@ -17,7 +17,9 @@ A fast, text-first, version-controlled static documentation website for the NIST
 - Re-coded the root repository index page mapping script to systematically assemble an actionable dashboard layout listing each major SSDF practice grouping.
 - Upgraded the navigation auto-generation script to structurally nest practices implicitly under an un-keyed version folder header (e.g `V1.1`).
 - Disabled `navigation.sections` in config to render top-level hierarchy as natively collapsible containers instead of sticky category headings.
-- Configured a github-actions run template to update and deploy via gh-pages securely.
+- Built a professional `README.md` containing instructions for deployment natively on Cloudflare Pages and setting up MkDocs for immediate local iterations.
+- Established rigorous Git hygiene (`.gitignore`) ignoring `venv` and the statically generated `/site` builds.
+- Initialized local Git repository, created initial commit mapping, removed the legacy Github actions folder, and established the remote integration targeting `karant-dev/nist-ssdf-site`.
 - Included an assumed structure of the `ssdf_v1.1.json` input data mapped from the script constraints.
 
 ## Next steps
