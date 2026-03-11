@@ -106,6 +106,34 @@ def process_ssdf_data(json_path, output_dir):
                 imp_id = imp.get('identifier', '')
                 anchor_id = imp_id.replace('.', '-').lower()
                 body += f"## {imp_id} {{: #{anchor_id} }}\n\n"
+                
+                # Render a warning admonition for deprecated/moved stubs
+                if imp.get('deprecated'):
+                    moved_to = imp.get('moved_to', 'another task')
+                    moved_parts = moved_to.split('.')
+                    # Implementations live as anchored sections within their parent task page.
+                    # e.g. PO.1.3 is a section on v1.2/po/po-1.md with anchor #po-1-3
+                    # e.g. PW.4.4 is a section on v1.2/pw/pw-4.md with anchor #pw-4-4
+                    current_group = task_id.split('.')[0].lower()
+                    target_group = moved_parts[0].lower()
+                    if len(moved_parts) >= 3:
+                        # e.g. PO.1.3 -> parent file is po-1.md, anchor is po-1-3
+                        parent_file = f"{moved_parts[0].lower()}-{moved_parts[1]}.md"
+                        anchor = moved_to.replace('.', '-').lower()
+                        if target_group != current_group:
+                            moved_link = f"../{target_group}/{parent_file}#{anchor}"
+                        else:
+                            moved_link = f"{parent_file}#{anchor}"
+                    else:
+                        # Fallback: just link to the group index if structure unclear
+                        if target_group != current_group:
+                            moved_link = f"../{target_group}/"
+                        else:
+                            moved_link = "./"
+                    body += f'!!! warning "Task Moved"\n'
+                    body += f'    This task has been relocated. Please refer to [{moved_to}]({moved_link}) for the current content.\n\n'
+                    continue
+                
                 body += f"{imp.get('description', '')}\n\n"
                 
                 examples = imp.get("examples", [])
@@ -128,24 +156,20 @@ def process_ssdf_data(json_path, output_dir):
 
     # Re-build `mkdocs.yml` explicit navigation tree securely
     print("Generating explicit Navigation Tree for mkdocs.yml...")
-    nav_tree = [
-        {"NIST SSDF Documentation Hub": "index.md"},
-        {f"V{version}": [
-            f"v{version}/index.md"
-        ]}
-    ]
-    
+
+    # Build this version's nav entry
+    version_entry_key = f"V{version}"
+    version_nav_items = [f"v{version}/index.md"]
+
     for practice in data.get("practices", []):
         practice_id = practice.get("identifier")
         practice_name = practice.get("name")
         practice_dir_name = practice_id.lower()
-        
+
         practice_nav = [
-            # In MkDocs Material w/ navigation.indexes, mapping an un-keyed index page right under the section 
-            # turns the section parent itself into a clickable hyperlink!
-            f"v{version}/{practice_dir_name}/index.md" 
+            f"v{version}/{practice_dir_name}/index.md"
         ]
-        
+
         for task in practice.get("tasks", []):
             task_id = task.get("identifier")
             task_name = task.get("name", task.get("title", ""))
@@ -153,27 +177,54 @@ def process_ssdf_data(json_path, output_dir):
             practice_nav.append({
                 f"{task_id}: {task_name}": f"v{version}/{practice_dir_name}/{task_file_name}"
             })
-            
-        nav_tree[1][f"V{version}"].append({
-            f"{practice_id}: {practice_name}": practice_nav
-        })
-        
+
+        version_nav_items.append({f"{practice_id}: {practice_name}": practice_nav})
+
+    new_version_entry = {version_entry_key: version_nav_items}
+
     mkdocs_yaml_path = os.path.join(output_dir, "..", "mkdocs.yml")
     mkdocs_yaml_path = os.path.normpath(mkdocs_yaml_path)
     if os.path.exists(mkdocs_yaml_path):
         with open(mkdocs_yaml_path, "r") as f:
             mkdocs_content = f.read()
-            
+
+        # Read existing nav so we can merge, preserving other versions
+        existing_nav = []
         if "\nnav:\n" in mkdocs_content:
+            nav_yaml_str = mkdocs_content[mkdocs_content.index("\nnav:\n") + 1:]
+            try:
+                existing_nav = yaml.safe_load(nav_yaml_str).get("nav", []) or []
+            except Exception:
+                existing_nav = []
             mkdocs_content = mkdocs_content[:mkdocs_content.index("\nnav:\n")]
-            
-        nav_block = yaml.dump({"nav": nav_tree}, sort_keys=False)
+
+        # Merge: keep hub entry, replace/add this version, keep all other versions
+        hub_entry = {"NIST SSDF Documentation Hub": "index.md"}
+        merged_nav = [hub_entry]
+        version_added = False
+        for entry in existing_nav:
+            if not isinstance(entry, dict):
+                continue
+            key = list(entry.keys())[0]
+            if key == "NIST SSDF Documentation Hub":
+                continue  # Already prepended
+            elif key == version_entry_key:
+                merged_nav.append(new_version_entry)
+                version_added = True
+            else:
+                merged_nav.append(entry)
+
+        if not version_added:
+            merged_nav.append(new_version_entry)
+
+        nav_block = yaml.dump({"nav": merged_nav}, sort_keys=False)
         with open(mkdocs_yaml_path, "w") as f:
             f.write(mkdocs_content + "\n" + nav_block)
             
 if __name__ == "__main__":
-    # Assumes the script runs from the repository root
-    input_json = "ssdf_v1.1.json"
+    import sys
+    # Accepts optional input JSON path as first argument, defaults to v1.1
+    input_json = sys.argv[1] if len(sys.argv) > 1 else "ssdf_v1.1.json"
     docs_dir = "docs"
     
     if not os.path.exists(input_json):

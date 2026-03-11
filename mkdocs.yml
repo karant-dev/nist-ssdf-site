@@ -62,6 +62,40 @@ extra_css:
 
 nav:
 - NIST SSDF Documentation Hub: index.md
+- V1.2:
+  - v1.2/index.md
+  - 'PO: Prepare the Organization':
+    - v1.2/po/index.md
+    - 'PO.1: Define Security Requirements for Software Development': v1.2/po/po-1.md
+    - 'PO.2: Implement Roles and Responsibilities': v1.2/po/po-2.md
+    - 'PO.3: Implement Supporting Toolchains': v1.2/po/po-3.md
+    - 'PO.4: Define and Use Criteria for Software Security Checks': v1.2/po/po-4.md
+    - 'PO.5: Implement and Maintain Secure Environments for Software Development': v1.2/po/po-5.md
+    - 'PO.6: Define and Implement a Continuous Process Improvement Plan': v1.2/po/po-6.md
+  - 'PS: Protect the Software':
+    - v1.2/ps/index.md
+    - 'PS.1: Protect All Forms of Code from Unauthorized Access and Tampering': v1.2/ps/ps-1.md
+    - 'PS.2: Provide a Mechanism for Verifying Software Release Integrity': v1.2/ps/ps-2.md
+    - 'PS.3: Archive and Protect Each Software Release': v1.2/ps/ps-3.md
+    - 'PS.4: Ensure Software Updates Are Robust and Reliable': v1.2/ps/ps-4.md
+  - 'PW: Produce Well-Secured Software':
+    - v1.2/pw/index.md
+    - 'PW.1: Design Software to Meet Security Requirements and Mitigate Security Risks': v1.2/pw/pw-1.md
+    - 'PW.2: Review the Software Design to Verify Compliance with Security Requirements and Risk Information': v1.2/pw/pw-2.md
+    - 'PW.3: Verify Third-Party Software Complies with Security Requirements': v1.2/pw/pw-3.md
+    - 'PW.4: Reuse Existing, Well-Secured Software When Feasible Instead of Duplicating Functionality': v1.2/pw/pw-4.md
+    - 'PW.5: Create Source Code by Adhering to Secure Coding Practices': v1.2/pw/pw-5.md
+    - 'PW.6: Configure the Compilation, Interpreter, and Build Processes to Improve Executable Security': v1.2/pw/pw-6.md
+    - ? 'PW.7: Review and/or Analyze Human-Readable Code to Identify Vulnerabilities
+        and Verify Compliance with Security Requirements'
+      : v1.2/pw/pw-7.md
+    - 'PW.8: Test Executable Code to Identify Vulnerabilities and Verify Compliance with Security Requirements': v1.2/pw/pw-8.md
+    - 'PW.9: Configure Software to Have Secure Settings by Default': v1.2/pw/pw-9.md
+  - 'RV: Respond to Vulnerabilities':
+    - v1.2/rv/index.md
+    - 'RV.1: Identify and Confirm Vulnerabilities on an Ongoing Basis': v1.2/rv/rv-1.md
+    - 'RV.2: Assess, Prioritize, and Remediate Vulnerabilities': v1.2/rv/rv-2.md
+    - 'RV.3: Analyze Vulnerabilities to Identify Their Root Causes': v1.2/rv/rv-3.md
 - V1.1:
   - v1.1/index.md
   - 'PO: Prepare the Organization':
