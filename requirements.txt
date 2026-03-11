@@ -1,0 +1,5 @@
+mkdocs==1.6.1
+mkdocs-material==9.5.34
+PyYAML==6.0.2
+pandas>=2.0.0
+openpyxl>=3.1.0

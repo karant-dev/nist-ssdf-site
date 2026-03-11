@@ -1,0 +1,95 @@
+site_name: NIST SSDF Documentation
+site_description: A text-first, version-controlled static documentation website for the NIST Secure Software Development Framework (SSDF).
+site_author: DocOps Engineer
+
+theme:
+  name: material
+  font:
+    text: Inter
+    code: Roboto Mono
+  features:
+    - navigation.indexes
+    - navigation.instant
+    - navigation.tracking
+    - navigation.path
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+        
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+        
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+
+# Ensures clean URLs like /po/po-1/ instead of /po/po-1.html
+use_directory_urls: true
+
+plugins:
+  - search
+
+# We omit the explicitly defined `nav` parameter. By default, MkDocs
+# dynamically generates the navigation map based on the docs/ folder hierarchy!
+# It will recognize the v1.1 directory automatically.
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+- NIST SSDF Documentation Hub: index.md
+- V1.1:
+  - v1.1/index.md
+  - 'PO: Prepare the Organization':
+    - v1.1/po/index.md
+    - 'PO.1: Define Security Requirements for Software Development': v1.1/po/po-1.md
+    - 'PO.2: Implement Roles and Responsibilities': v1.1/po/po-2.md
+    - 'PO.3: Implement Supporting Toolchains': v1.1/po/po-3.md
+    - 'PO.4: Define and Use Criteria for Software Security Checks': v1.1/po/po-4.md
+    - 'PO.5: Implement and Maintain Secure Environments for Software Development': v1.1/po/po-5.md
+  - 'PS: Protect the Software':
+    - v1.1/ps/index.md
+    - 'PS.1: Protect All Forms of Code from Unauthorized Access and Tampering': v1.1/ps/ps-1.md
+    - 'PS.2: Provide a Mechanism for Verifying Software Release Integrity': v1.1/ps/ps-2.md
+    - 'PS.3: Archive and Protect Each Software Release': v1.1/ps/ps-3.md
+  - 'PW: Produce Well-Secured Software':
+    - v1.1/pw/index.md
+    - 'PW.1: Design Software to Meet Security Requirements and Mitigate Security Risks': v1.1/pw/pw-1.md
+    - 'PW.2: Review the Software Design to Verify Compliance with Security Requirements and Risk Information': v1.1/pw/pw-2.md
+    - 'PW.4: Reuse Existing, Well-Secured Software When Feasible Instead of Duplicating Functionality': v1.1/pw/pw-4.md
+    - 'PW.5: Create Source Code by Adhering to Secure Coding Practices': v1.1/pw/pw-5.md
+    - 'PW.6: Configure the Compilation, Interpreter, and Build Processes to Improve Executable Security': v1.1/pw/pw-6.md
+    - ? 'PW.7: Review and/or Analyze Human-Readable Code to Identify Vulnerabilities
+        and Verify Compliance with Security Requirements'
+      : v1.1/pw/pw-7.md
+    - 'PW.8: Test Executable Code to Identify Vulnerabilities and Verify Compliance with Security Requirements': v1.1/pw/pw-8.md
+    - 'PW.9: Configure Software to Have Secure Settings by Default': v1.1/pw/pw-9.md
+  - 'RV: Respond to Vulnerabilities':
+    - v1.1/rv/index.md
+    - 'RV.1: Identify and Confirm Vulnerabilities on an Ongoing Basis': v1.1/rv/rv-1.md
+    - 'RV.2: Assess, Prioritize, and Remediate Vulnerabilities': v1.1/rv/rv-2.md
+    - 'RV.3: Analyze Vulnerabilities to Identify Their Root Causes': v1.1/rv/rv-3.md
