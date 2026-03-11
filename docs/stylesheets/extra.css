@@ -6,6 +6,14 @@
   --md-accent-fg-color: #10b981;
 }
 
+/* Dark mode: soft periwinkle-blue palette — readable without eye strain */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #60a5fa;
+  --md-primary-fg-color--light: #93c5fd;
+  --md-primary-fg-color--dark: #3b82f6;
+  --md-accent-fg-color: #a5b4fc;
+}
+
 /* Dynamic Gradient on Main H1 */
 .md-typeset h1 {
   background: linear-gradient(135deg, var(--md-primary-fg-color) 0%, var(--md-accent-fg-color) 100%);
@@ -29,7 +37,7 @@
 
 [data-md-color-scheme="slate"] .md-typeset h2 {
   color: var(--md-primary-fg-color--light);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 2px solid rgba(96, 165, 250, 0.15);
 }
 
 /* Premium Card Hover Effects on Admonitions */
@@ -73,8 +81,8 @@
 }
 
 [data-md-color-scheme="slate"] .md-nav__item .md-nav__link--active {
-  background-color: rgba(129, 140, 248, 0.15);
-  box-shadow: 0 0 0 0.2rem rgba(129, 140, 248, 0.15);
+  background-color: rgba(96, 165, 250, 0.12);
+  box-shadow: 0 0 0 0.2rem rgba(96, 165, 250, 0.12);
   color: var(--md-primary-fg-color--light) !important;
 }
 

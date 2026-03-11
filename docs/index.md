@@ -6,3 +6,4 @@ This documentation provides easily accessible framework components natively sear
 
 ### Framework Iterations
 * [SSDF Version 1.1](v1.1/index.md)
+* [SSDF Version 1.2](v1.2/index.md)

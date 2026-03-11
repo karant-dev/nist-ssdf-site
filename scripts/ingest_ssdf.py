@@ -220,6 +220,39 @@ def process_ssdf_data(json_path, output_dir):
         nav_block = yaml.dump({"nav": merged_nav}, sort_keys=False)
         with open(mkdocs_yaml_path, "w") as f:
             f.write(mkdocs_content + "\n" + nav_block)
+
+    # Update the root docs/index.md hub page to list this version
+    root_index_path = os.path.join(output_dir, "index.md")
+    version_label = f"SSDF Version {version}"
+    version_link = f"[{version_label}](v{version}/index.md)"
+    version_entry = f"* {version_link}"
+
+    if os.path.exists(root_index_path):
+        with open(root_index_path, "r") as f:
+            root_content = f.read()
+
+        # If this version is already listed, skip
+        if f"v{version}/index.md" not in root_content:
+            # Append the version entry before the end (after the last bullet if any)
+            if "### Framework Iterations" in root_content:
+                root_content = root_content.rstrip() + f"\n{version_entry}\n"
+            else:
+                root_content = root_content.rstrip() + "\n\n### Framework Iterations\n" + version_entry + "\n"
+            with open(root_index_path, "w") as f:
+                f.write(root_content)
+            print(f"Updated root index.md with {version_label}")
+    else:
+        # Create from scratch
+        root_content = (
+            "# NIST SSDF Documentation Hub\n\n"
+            "Welcome to the static documentation website for the NIST Secure Software Development Framework (SSDF).\n\n"
+            "This documentation provides easily accessible framework components natively searchable and traversable.\n\n"
+            "### Framework Iterations\n"
+            f"{version_entry}\n"
+        )
+        with open(root_index_path, "w") as f:
+            f.write(root_content)
+        print(f"Created root index.md with {version_label}")
             
 if __name__ == "__main__":
     import sys
