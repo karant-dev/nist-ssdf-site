@@ -16,7 +16,7 @@
 
 /* Dark mode header bar — matches h1 text colour */
 [data-md-color-scheme="slate"] .md-header {
-  background-color: #117cff;
+  background-color: #0458bf;
 }
 
 /* H1 — solid primary colour, no gradient */

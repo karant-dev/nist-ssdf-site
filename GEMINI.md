@@ -22,14 +22,14 @@ A fast, text-first, version-controlled static documentation website for the NIST
 - Initialized local Git repository, created initial commit mapping, removed the legacy Github actions folder, and established the remote integration targeting `karant-dev/nist-ssdf-site`.
 - Included an assumed structure of the `ssdf_v1.1.json` input data mapped from the script constraints.
 - Optimized `scripts/ingest_ssdf.py` to support version-agnostic ingestion with smart navigation merging in `mkdocs.yml`.
-- Integrated SSDF v1.2 via `scripts/convert_csv_to_json.py` handling PDF-extracted CSV data and cross-version reference hydration.
+- Integrated SSDF v1.2 via `scripts/convert_csv_to_json.py` handling PDF-extracted CSV data and cross-version reference hydration (supporting literal `\n` sequences).
 - Implemented version status labels (`(current)`, `(upcoming)`) dynamically visible in both navigation and the root hub page.
 - Configured automatic descending version sorting (newest first) for both the navigation tree and the root documentation hub.
 - Refined the visual design system:
     - Replaced the light mode indigo/emerald gradients with solid, premium colors (Indigo for Light, Blue for Dark).
     - Established a high-contrast yet eye-friendly Blue palette for Dark Mode (Slate scheme).
-    - Custom-aligned the header bar color with the document typography for a unified flat aesthetic.
-- Implemented robust "Task Moved" stubs for SSDF v1.2 that anchor directly to the new task locations.
+    - Custom-aligned the header bar color (#0458bf) with the document typography for a unified flat aesthetic.
+- Implemented robust "Task Moved" stubs for SSDF v1.2 that anchor directly to the new task locations via parent page offsets.
 - Finalized a clean, production-ready build pipeline that preserves Git hygiene while supporting iterative updates.
 
 ## Next steps
